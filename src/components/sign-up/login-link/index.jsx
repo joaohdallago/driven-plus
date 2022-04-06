@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 
-export default function SignUpLink() {
+export default function LoginLink() {
     return (
         <Container>
-            <Link to='/sign-up'>
-                Não possuí uma conta? Cadastre-se
+            <Link to='/'>
+                Já possuí uma conta? Entre
             </Link>
         </Container>
     )
