@@ -1,15 +1,23 @@
 import styled from 'styled-components';
 
-export default function Inputs() {
+export default function Inputs({ loginData, setLoginData }) {
+    const { email, password } = loginData;
+    
     return (
         <Container>
             <input
                 type="email"
                 placeholder="E-mail"
+                required
+                onChange={e => setLoginData({...loginData, email: e.target.value})}
+                value={email}
             />
             <input
                 type="password"
                 placeholder="Senha" 
+                required
+                onChange={e => setLoginData({...loginData, password: e.target.value})}
+                value={password}
             />
         </Container>
     )
