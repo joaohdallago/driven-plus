@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+
+import UserContext from '../../../contexts/UserContext'
 
 import Inputs from './inputs';
 import SubmitButton from './submit-button';
 
 export default function Form() {
     const navigate = useNavigate();
-
+    const { setUser } = useContext(UserContext);
     const [ loginData, setLoginData ] = useState(
         {
             email: "",
@@ -24,6 +26,8 @@ export default function Form() {
         const promise = axios.post(url, loginData);
 
         promise.then((response) => {
+            setUser(response.data)
+
             response.data.subscriptions ?
                 navigate('/home')
             :
