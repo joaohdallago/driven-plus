@@ -9,7 +9,10 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
 
         text-decoration: none;
+        list-style-type: none;
+    }
 
+    a {
         color: white;
     }
 

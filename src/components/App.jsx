@@ -9,6 +9,7 @@ import GlobalStyles from "../theme/globalStyles";
 import Login from "./login";
 import SignUp from "./sign-up";
 import Subscriptions from "./subscriptions"
+import Subscription from "./subscription";
 import Home from "./home";
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
                         <Route path='/' element={<Login />}/>
                         <Route path='/sign-up' element={<SignUp />}/>
                         <Route path='/subscriptions' element={<Subscriptions />}/>
+                        <Route path='/subscriptions/:subscriptionId' element={<Subscription />}/>
                         <Route path='/home' element={<Home />}/>
                     </Routes>
                 </BrowserRouter>
