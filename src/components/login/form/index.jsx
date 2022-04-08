@@ -30,8 +30,6 @@ export default function Form() {
 
         promise.then((response) => {
             setUser(response.data)
-
-            setIsLoading(false)
             response.data.membership ?
                 navigate('/home')
             :
