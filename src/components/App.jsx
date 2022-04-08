@@ -13,7 +13,11 @@ import Subscription from "./subscription";
 import Home from "./home";
 
 export default function App() {
-    const [ user, setUser ] = useState({});
+    const [ user, setUser ] = useState({
+        membership: {
+            perks: []
+        }
+    });
 
     return (
         <>

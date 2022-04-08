@@ -5,8 +5,7 @@ import UserContext from '../../contexts/UserContext';
 
 import UserIcon from './user-icon';
 import Header from './header';
-import Perks from './perks';
-import Buttons from './buttons';
+import Main from './main'
 
 export default function Home() {
     const { user } = useContext(UserContext);
@@ -15,14 +14,15 @@ export default function Home() {
         <Container>
             <UserIcon />
             <Header {...user}/>
-            <Perks />
-            <Buttons />
+            <Main {...user}/>
         </Container>
     )
 };
 
 const Container = styled.div`
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 
     padding: 32px 38px 12px;
 `;

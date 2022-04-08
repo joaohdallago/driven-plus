@@ -15,5 +15,20 @@ export default function Header({ name, membership }) {
 }
 
 const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 
+    margin-bottom: 53px;
+
+    >div {
+        >img {
+            height: 50px;
+        }
+    }
+
+    >h3 {
+        font-size: 24px;
+        text-align: center;
+    }
 `;

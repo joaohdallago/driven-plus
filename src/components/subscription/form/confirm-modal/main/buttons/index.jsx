@@ -6,21 +6,31 @@ import { useNavigate } from 'react-router-dom';
 import UserContext from '../../../../../../contexts/UserContext';
 
 export default  function Buttons({ setIsModalOpen, purchaseData }) {
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
+
+    const { token, email, password } = user;
 
     const makePurchase = () => {
         const config = {
             headers: {
-                Authorization: 'Bearer ' + user.token 
+                Authorization: 'Bearer ' + token 
             }
         };
 
-        const url = 'https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions';
+        const purchaseUrl = 'https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions';
 
-        const promise = axios.post(url, purchaseData, config);
+        const promise = axios.post(purchaseUrl, purchaseData, config);
 
-        promise.then(() => navigate('/home'))
+        promise.then(() => {
+            const loginUrl = 'https://mock-api.driven.com.br/api/v4/driven-plus/auth/login'
+            
+            axios.post(loginUrl, {email, password}, config).then(response => {
+                setUser(response.data)
+                navigate('/home')
+            })
+        })
+
         promise.catch(() => alert('Ops! Houve algum erro...'))
     }
 
