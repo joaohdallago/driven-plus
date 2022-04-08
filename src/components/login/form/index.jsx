@@ -28,10 +28,16 @@ export default function Form() {
 
         const promise = axios.post(url, loginData);
 
+
         promise.then((response) => {
             setUser(response.data)
-            response.data.membership ?
+
+            const ifMember = () => {
+                setIsLoading(false)
                 navigate('/home')
+            }  
+            response.data.membership ?
+                ifMember()
             :
                 navigate('/subscriptions');
         })

@@ -12,10 +12,11 @@ export default function Plans() {
     const { user } = useContext(UserContext);
     const [ plansList, setPlansList ] = useState([]);
 
+    const { token } =  user
     useEffect(() => {
         const config = {
             headers: {
-                Authorization: 'Bearer ' + user.token
+                Authorization: 'Bearer ' + token
             }
         }
 
@@ -27,7 +28,7 @@ export default function Plans() {
             setPlansList(response.data)
             setIsLoading(false)
         })
-    }, [])
+    }, [setIsLoading, token]);
 
     return (
         <Container>
