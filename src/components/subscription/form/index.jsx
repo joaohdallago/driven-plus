@@ -4,10 +4,11 @@ import { useParams } from 'react-router-dom';
 
 import Inputs from './inputs';
 import SubmitButton from './submit-button';
+import ConfirmModal from './confirm-modal'
 
 export default function Form() {
     const { subscriptionId } = useParams()
-
+    const [ isModalOpen, setIsModalOpen ] = useState(false)
     const [ purchaseData, setPurchaseData ] = useState({
         membershipId: subscriptionId,
         cardName: "",
@@ -18,14 +19,15 @@ export default function Form() {
 
     const submit = (event) => {
         event.preventDefault();
-
-        alert()
+        
+        setIsModalOpen(true);
     }
 
     return (
         <StyledForm onSubmit={submit}>
             <Inputs {...{purchaseData, setPurchaseData}}/>
             <SubmitButton />
+            {isModalOpen && <ConfirmModal {...{setIsModalOpen}}/>}
         </StyledForm>
     )
 }

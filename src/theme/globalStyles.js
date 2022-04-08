@@ -16,6 +16,10 @@ const GlobalStyles = createGlobalStyle`
         color: white;
     }
 
+    button {
+        background-color: transparent;
+    }
+
     body {
         font-family: 'Roboto', sans-serif;
 

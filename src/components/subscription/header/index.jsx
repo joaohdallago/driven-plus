@@ -1,6 +1,12 @@
 import styled from 'styled-components';
+import { useContext } from 'react';
 
-export default function Header({ image, name }) {
+import SubscriptionContext from '../../../contexts/SubscriptionContext';
+
+export default function Header() {
+    const { subscriptionData } = useContext(SubscriptionContext);
+    const { image, name } = subscriptionData
+
     return (
         <Container>
             <div>

@@ -4,8 +4,6 @@ export default function Inputs({ purchaseData, setPurchaseData }) {
 
     const { cardName, cardNumber, securityNumber, expirationDate } = purchaseData;
 
-    console.log(purchaseData)
-
     return (
         <Container>
             <input

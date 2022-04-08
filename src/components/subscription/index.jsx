@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import UserContext from '../../contexts/UserContext';
+import SubscriptionContext from '../../contexts/SubscriptionContext';
 
 import BackButton from './back-button';
 import Header from './header';
@@ -39,17 +40,21 @@ export default function Subscription() {
     const { name, image, perks, price } = subscriptionData;
 
     return (
-        <Container>
-            <BackButton />
-            <Header {...{name, image}}/>
-            <PerksAndPrices {...{perks, price}}/>
-            <Form />
-        </Container>
+        <SubscriptionContext.Provider value={{ subscriptionData, setSubscriptionData }}>
+            <Container>
+                <BackButton />
+                <Header />
+                <PerksAndPrices />
+                <Form />
+            </Container>
+        </SubscriptionContext.Provider>
     )
 };
 
 const Container = styled.div`
-    padding: 40px;
+    position: relative;
+
+    padding: 24px 38px 0;
 
     display: flex;
     flex-direction: column;

@@ -1,9 +1,16 @@
 import styled from 'styled-components';
+import { useContext } from 'react';
+
+import SubscriptionContext from '../../../contexts/SubscriptionContext';
 
 import Perks from './perks';
 import Price from './price';
 
-export default function PerksAndPrices({ perks, price }) {
+export default function PerksAndPrices() {
+    const { subscriptionData } = useContext(SubscriptionContext);
+    
+    const { perks, price } = subscriptionData
+
     return(
         <Container>
             <Perks perksList={perks}/>
