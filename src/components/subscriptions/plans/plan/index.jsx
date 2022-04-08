@@ -1,18 +1,26 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+
+import IsLoadingContext from '../../../../contexts/IsLoadingContext'
 
 export default function Plan({ planData }) {
+    const { setIsLoading } = useContext(IsLoadingContext);
+    const navigate = useNavigate();
     const { id, image, price } = planData;
 
     const formattedPrice = 'R$ ' + price.replace('.', ',')
-    return (
-        <Link to={'/subscriptions/' + id}>
-            <Container>
-                <img src={image} alt="plan image" />
 
-                <span>{formattedPrice}</span>
-            </Container>
-        </Link>
+    const goToSubscription = () => {
+        setIsLoading(true);
+        navigate('/subscriptions/' + id)
+    }
+
+    return (
+        <Container onClick={goToSubscription}>
+            <img src={image} alt="plan image" />
+            <span>{formattedPrice}</span>
+        </Container>
     )
 }
 

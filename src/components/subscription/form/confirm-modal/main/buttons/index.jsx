@@ -3,15 +3,19 @@ import axios from 'axios';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import IsLoadingContext from '../../../../../../contexts/IsLoadingContext'
+
 import UserContext from '../../../../../../contexts/UserContext';
 
 export default  function Buttons({ setIsModalOpen, purchaseData }) {
+    const { setIsLoading } = useContext(IsLoadingContext);
     const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     const { token, email, password } = user;
 
     const makePurchase = () => {
+        setIsLoading(true);
         const config = {
             headers: {
                 Authorization: 'Bearer ' + token 
@@ -27,11 +31,15 @@ export default  function Buttons({ setIsModalOpen, purchaseData }) {
             
             axios.post(loginUrl, {email, password}, config).then(response => {
                 setUser(response.data)
+                setIsLoading(false);
                 navigate('/home')
             })
         })
 
-        promise.catch(() => alert('Ops! Houve algum erro...'))
+        promise.catch(() => {
+            alert('Ops! Houve algum erro...')
+            setIsLoading(false)
+        })
     }
 
     return (

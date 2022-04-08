@@ -1,11 +1,13 @@
 import Favicon from "react-favicon";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
 
 import UserContext from '../contexts/UserContext'
+import IsLoadingContext from '../contexts/IsLoadingContext'
 
 import GlobalStyles from "../theme/globalStyles";
 
+import Loading from './loading'
 import Login from "./login";
 import SignUp from "./sign-up";
 import Subscriptions from "./subscriptions"
@@ -18,6 +20,7 @@ export default function App() {
             perks: []
         }
     });
+    const [ isLoading, setIsLoading ] = useState(false)
 
     return (
         <>
@@ -25,15 +28,19 @@ export default function App() {
             <GlobalStyles />
 
             <UserContext.Provider value={{ user, setUser }} >
-                <BrowserRouter>
-                    <Routes>
-                        <Route path='/' element={<Login />}/>
-                        <Route path='/sign-up' element={<SignUp />}/>
-                        <Route path='/subscriptions' element={<Subscriptions />}/>
-                        <Route path='/subscriptions/:subscriptionId' element={<Subscription />}/>
-                        <Route path='/home' element={<Home />}/>
-                    </Routes>
-                </BrowserRouter>
+                <IsLoadingContext.Provider value={{ isLoading, setIsLoading }}>
+                    <Loading />
+                    
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path='/' element={<Login />}/>
+                            <Route path='/sign-up' element={<SignUp />}/>
+                            <Route path='/subscriptions' element={user.token ? <Subscriptions /> : <Navigate to='/' replace/>}/>
+                            <Route path='/subscriptions/:subscriptionId' element={user.token ? <Subscription /> : <Navigate to='/' replace/>}/>
+                            <Route path='/home' element={user.token ? <Home /> : <Navigate to='/' replace/>}/>
+                        </Routes>
+                    </BrowserRouter>
+                </IsLoadingContext.Provider>
             </UserContext.Provider>
         </>
     )

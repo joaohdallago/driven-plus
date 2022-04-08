@@ -1,14 +1,20 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 
-import UserContext from '../../../../../contexts/UserContext'
-
+import IsLoadingContext from '../../../../../contexts/IsLoadingContext';
 
 export default function ChangeSubscription() {
-    const { user } = useContext(UserContext);
+    const { setIsLoading } = useContext(IsLoadingContext);
+    const navigate = useNavigate();
+
+    const changeSubscription = () => {
+        setIsLoading(true)
+        navigate('/subscriptions')
+    }
 
     return (
-        <StyledButton>
+        <StyledButton onClick={changeSubscription}>
             Mudar plano
         </StyledButton>
     )  

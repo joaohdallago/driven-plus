@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import axios from 'axios';
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
  
+import IsLoadingContext from '../../../contexts/IsLoadingContext'
+
 import Inputs from './inputs';
 import SubmitButton from './submit-button';
 
 export default function Form() {
+    const { setIsLoading } = useContext(IsLoadingContext);
     const navigate = useNavigate();
 
     const [signUpData, setSignUpData] = useState(
@@ -20,14 +23,21 @@ export default function Form() {
 
     const submitSignUp = (event) => {
         event.preventDefault();
+        setIsLoading(true)
 
         const url = 'https://mock-api.driven.com.br/api/v4/driven-plus/auth/sign-up';
 
         const promise = axios.post(url, signUpData);
 
-        promise.then(() => navigate('/'))
+        promise.then(() => {
+            navigate('/')
+            setIsLoading(false)
+        })
 
-        promise.catch(() => alert('Ops! Houve algum erro...'))
+        promise.catch(() => {
+            alert('Ops! Houve algum erro...')
+            setIsLoading(false)
+        })
 
     }
 

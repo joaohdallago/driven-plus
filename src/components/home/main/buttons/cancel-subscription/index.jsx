@@ -2,9 +2,12 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import UserContext from '../../../../../contexts/UserContext'
+import IsLoadingContext from '../../../../../contexts/IsLoadingContext'
 
 export default function CancelSubscription() {
+    const { setIsLoading } = useContext(IsLoadingContext);
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
     const { token } = user;
@@ -12,6 +15,7 @@ export default function CancelSubscription() {
     console.log(user)
     
     const cancelSubscription = () => {
+        setIsLoading(true);
         const config = {
             headers: {
                 Authorization: 'Bearer ' + token

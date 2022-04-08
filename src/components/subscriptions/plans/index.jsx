@@ -3,10 +3,12 @@ import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 
 import UserContext from '../../../contexts/UserContext'
+import IsLoadingContext from '../../../contexts/IsLoadingContext';
 
 import Plan from './plan';
 
 export default function Plans() {
+    const { setIsLoading } = useContext(IsLoadingContext);
     const { user } = useContext(UserContext);
     const [ plansList, setPlansList ] = useState([]);
 
@@ -21,7 +23,10 @@ export default function Plans() {
 
         const promise = axios.get(url, config);
 
-        promise.then((response) => setPlansList(response.data))
+        promise.then((response) => {
+            setPlansList(response.data)
+            setIsLoading(false)
+        })
     }, [])
 
     return (

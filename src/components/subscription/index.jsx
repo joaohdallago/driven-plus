@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 import UserContext from '../../contexts/UserContext';
 import SubscriptionContext from '../../contexts/SubscriptionContext';
+import IsLoadingContext from '../../contexts/IsLoadingContext'
 
 import BackButton from './back-button';
 import Header from './header';
@@ -12,6 +13,7 @@ import PerksAndPrices from "./perks-and-price";
 import Form from "./form";
 
 export default function Subscription() {
+    const { setIsLoading } = useContext(IsLoadingContext);
     const { user } = useContext(UserContext);
     const { subscriptionId } = useParams();
     const [ subscriptionData, setSubscriptionData ] = useState({
@@ -34,7 +36,10 @@ export default function Subscription() {
 
         const promise = axios.get(url, config);
 
-        promise.then(response => setSubscriptionData(response.data))
+        promise.then(response => {
+            setSubscriptionData(response.data)
+            setIsLoading(false)
+        })
     }, []);
 
     return (
