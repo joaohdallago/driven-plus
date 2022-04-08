@@ -37,8 +37,6 @@ export default function Subscription() {
         promise.then(response => setSubscriptionData(response.data))
     }, []);
 
-    const { name, image, perks, price } = subscriptionData;
-
     return (
         <SubscriptionContext.Provider value={{ subscriptionData, setSubscriptionData }}>
             <Container>

@@ -27,7 +27,7 @@ export default function Form() {
         <StyledForm onSubmit={submit}>
             <Inputs {...{purchaseData, setPurchaseData}}/>
             <SubmitButton />
-            {isModalOpen && <ConfirmModal {...{setIsModalOpen}}/>}
+            {isModalOpen && <ConfirmModal {...{setIsModalOpen, purchaseData}}/>}
         </StyledForm>
     )
 }

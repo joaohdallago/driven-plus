@@ -5,7 +5,7 @@ import SubscriptionContext from '../../../../../contexts/SubscriptionContext';
 
 import Buttons from './buttons';
 
-export default function Main() {
+export default function Main({ setIsModalOpen, purchaseData }) {
     const { subscriptionData } = useContext(SubscriptionContext);
 
     const { name, price } = subscriptionData;
@@ -19,7 +19,7 @@ export default function Main() {
                 <span>{name} (R$ {price.replace('.', ',')})?</span>
             </header>
 
-            <Buttons />
+            <Buttons {...{setIsModalOpen, purchaseData }}/>
         </Container>
     )
 }

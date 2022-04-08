@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import CloseButton from './close-button'
 import Main from './main';
 
-export default function ConfirmModal({ setIsModalOpen}) {
+export default function ConfirmModal({ setIsModalOpen, purchaseData }) {
     return (
         <Container>
             <CloseButton {...{setIsModalOpen}}/>
-            <Main />
+            <Main {...{setIsModalOpen, purchaseData}}/>
         </Container>
     )
 }

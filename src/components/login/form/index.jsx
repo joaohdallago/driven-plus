@@ -28,7 +28,7 @@ export default function Form() {
         promise.then((response) => {
             setUser(response.data)
 
-            response.data.subscriptions ?
+            response.data.membership ?
                 navigate('/home')
             :
                 navigate('/subscriptions');
