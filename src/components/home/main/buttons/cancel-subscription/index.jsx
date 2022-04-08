@@ -11,8 +11,6 @@ export default function CancelSubscription() {
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
     const { token } = user;
-
-    console.log(user)
     
     const cancelSubscription = () => {
         setIsLoading(true);
